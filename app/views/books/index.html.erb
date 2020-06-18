@@ -44,12 +44,12 @@
 							    <%= link_to book_favorites_path(book), method: :post do %>
 							    	<i class = "fas fa-heart" aria-hidden="true" ></i>
 							  <% end %>
-							<%= book.favorites.count %>
 							</td>
-							  <% end %>
-							</td>
+							<% end %>
+							<td><%= book.favorites.count %></td>
+							<td>コメント数:<%= book.book_comments.count%></td>
 						</tr>
-						<% end %>
+						<%end %>
 					</tbody>
 				</table>
 				<!--books一覧 -->

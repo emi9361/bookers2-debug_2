@@ -8,13 +8,9 @@ class User < ApplicationRecord
   attachment :profile_image, destroy: false
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
-
-
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name, length: {maximum: 20, minimum: 2}
   validates :introduction, length: {maximum: 50}
 
-  def already_favorited?(book)
-    self.favorites.exists?(book_id: book.id)
-  end
+
 end

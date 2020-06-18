@@ -9,4 +9,5 @@ end
 
   resources :users,only: [:show,:index,:edit,:update]
 
+
 end
