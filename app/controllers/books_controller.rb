@@ -7,13 +7,13 @@ before_action :correct_user, only: [:edit, :update]
   	@book = Book.new
     @book2 = Book.find(params[:id])
     @user = @book2.user
+    @book_comment = BookComment.new
   end
 
   def index
   	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
     @book = Book.new
     @user = current_user
-
   end
 
   def create
@@ -57,7 +57,7 @@ before_action :correct_user, only: [:edit, :update]
      if current_user != book.user
         redirect_to books_path
       end
-    end
+  end
 
 end
 
