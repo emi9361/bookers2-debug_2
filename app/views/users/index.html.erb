@@ -25,15 +25,36 @@
 				</thead>
 
 				<tbody>
-					<% @users.each do |user| %>
+				  <% @users.each do |user| %>
 					<tr>
 						<td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
 						<td><%= user.name%></td>
 						<td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
+
+					    <td>フォロー数</td>
+					    <td><%= link_to following_user_path(user) do %>
+					    	<%= user.followings.count %>
+					    	<% end %>
+						</td>
+
+						<td>フォロワー数</td>
+				    	<td><%= link_to followers_user_path(user) do %>
+				      		<%= user.followers.count %>
+						    <% end %>
+						</td>
+
+						<td>
+							<% unless user.id == current_user.id %>
+							  <%if @relationship.empty? %>
+				                <%= button_to "フォローする", relationships_path({follow_id: user.id}),method: :post %>
+				              <% else %>
+			  	  			    <%= button_to "フォロー外す", relationship_path({follow_id: user.id}), method: :delete %>
+			  				  <% end %>
+			  				<% end %>
+			  			</td>
 					</tr>
-					<% end %>
+				  <% end %>
 				</tbody>
 			</table>
 	</div>
 		<!--users一覧 -->
-
