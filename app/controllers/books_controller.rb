@@ -13,7 +13,6 @@ before_action :correct_user, only: [:edit, :update]
   def index
   	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
     @book = Book.new
-    @user = current_user
   end
 
   def create

@@ -1,0 +1,10 @@
+
+<div class="container-search mt-5">
+	<% if @model == "user" %>
+  		<h2><%= "Users" %></h2>
+  			<%= render 'searcher', datas: @datas, model: @model %>
+	<% elsif @model == "book" %>
+  		<h2><%= "Books" %></h2>
+  			<%= render 'searcher', datas: @datas, model: @model %>
+	<% end %>
+</div>

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   	@users = User.all #一覧表示するためにUserモデルのデータを全て変数に入れて取り出す。
   	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
     @relationship = Relationship.where(user_id: current_user.id, follow_id: params[:id])
+
   end
 
   def edit
@@ -44,6 +45,7 @@ class UsersController < ApplicationController
     @users = @user.followers
     render 'show_follower'
   end
+
 
   private
 

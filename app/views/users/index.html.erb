@@ -25,7 +25,7 @@
 				</thead>
 
 				<tbody>
-				  <% @users.each do |user| %>
+			      <% @users.each do |user| %>
 					<tr>
 						<td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
 						<td><%= user.name%></td>
@@ -44,17 +44,15 @@
 						</td>
 
 						<td>
-							<% unless user.id == current_user.id %>
-							  <%if @relationship.empty? %>
-				                <%= button_to "フォローする", relationships_path({follow_id: user.id}),method: :post %>
-				              <% else %>
-			  	  			    <%= button_to "フォロー外す", relationship_path({follow_id: user.id}), method: :delete %>
-			  				  <% end %>
+					      <% unless user.id == current_user.id %>
+						    <%if @relationship.empty? %>
+			                  <%= button_to "フォローする", relationships_path({follow_id: user.id}),method: :post %>
+			                <% else %>
+		  	  			      <%= button_to "フォロー外す", relationship_path({follow_id: user.id}), method: :delete %>
 			  				<% end %>
-			  			</td>
+			  				  <% end %>
+		  				</td>
 					</tr>
 				  <% end %>
-				</tbody>
-			</table>
-	</div>
+		</div>
 		<!--users一覧 -->
