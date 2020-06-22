@@ -1,0 +1,10 @@
+
+<% if user_signed_in? %>
+    <% if book.already_favorited?(current_user) %>
+        <p><span>いいね解除: </span><%=link_to book.favorites.count, book_favorites_path(book.id), method: :delete, remote: true %></p>
+    <% else %>
+        <p><span>いいね登録: </span><%=link_to book.favorites.count, book_favorites_path(book.id), method: :post, remote: true %></p>
+    <% end %>
+<% else %>
+    <p><span>お気に入り数: </span><%= books.favorites.count %></p>
+<% end %>
