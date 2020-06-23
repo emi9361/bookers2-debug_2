@@ -1,4 +1,7 @@
+if (locatio.pathname == '/books'){
 //投稿一覧
-$('#index_favorite_<%= @book.id %>').html("<%= j(render partial: 'favorites/favorite', locals: {book: @book}) %>");
+  $('.book_<%= @book.id %>').html("<%= j(render partial: 'books/book',  book: @book) %>");
+} else {
 //投稿詳細
-$('#show_favorite_<%= @book.id %>').html("<%= j(render partial: 'favorites/favorite', locals: {book: @book}) %>");
+  $('.book_<%= @book.id %>').html("<%= j(render 'books/detail',  book: @book) %>");
+}

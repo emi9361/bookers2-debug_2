@@ -4,7 +4,7 @@
 			<div class="col-xs-3">
 
 			<h2>User info</h2>
-			<%= render 'users/profile', user: @user %>
+			<%= render 'users/profile', user: @book2.user %>
 
 			<h2>New book</h2>
 			<%= render 'books/newform', book: @book %>
@@ -13,48 +13,23 @@
 
 			<div class="col-xs-9">
 			  <h2>Book detail</h2>
-
+		  <!--投稿内容表示-->
 			  <table class="table">
-				  <tr>
-					<td>
-						<%= link_to user_path(@book2.user) do %>
-						<%= attachment_image_tag(@book2.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
-							<%= @book2.user.name %>
-						<% end %>
-					</td>
-					<td><%= link_to @book2.title, book_path(@book2) %></td>
-					<td><%= @book2.body %></td>
-					<td>
-					<% if @book2.favorited_by?(current_user) %>
-					    <%= link_to book_favorites_path(@book2), method: :delete do %>
-					        <i class = "fas fa-heart" aria-hidden="true" ></i>
-					    <% end %>
-
-					  <% else %>
-
-					    <%= link_to book_favorites_path(@book2), method: :post do %>
-					        <i class = "far fa-heart" aria-hidden="true" ></i>
-					    <% end %>
-					<% end %>
-					<td><%= @book2.favorites.count %></td>
-					<td>コメント数<%= @book2.book_comments.count %></td>
-
-					</td>
-
-					<% if @user.id == current_user.id %>
-					<td><%= link_to "Edit",edit_book_path(@book2), class: "btn-sm btn-success edit_book_#{@book2.id}" %></td>
-					<td><%= link_to "Destroy",@book2, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book2.id}" %></td>
-					<% end %>
-				  </tr>
+			  	<tr class = "book_<%= @book.id %>">
+					<%= render 'book', book: @book2 %>
+				</tr>
 			  </table>
-				<!--非同期処理表示コメント-->
-				<ul id="comments_area">
-					<%= render 'book_comments/index', {book_comment: @book_comment, book: @book} %>
-				</ul>
-				<!--非同期処理フォーム-->
+		  <!--非同期処理表示コメント-->
+			  <table class = "show-tb comment_<%= @book.book_comments %>">
+			  	<%= render 'comment',book_comments: @book.book_comments %>
+			  </table>
+			<!--非同期処理フォーム-->
 				<div class="comment-form">
-					<%= render 'book_comments/form', {book: @book2, book_comment: @book_comment} %>
-				</div>
+			        <%= form_with model:[@book2, @book_comment], data: {remote: true} do |f| %>
+			          <%= f.text_area :comment %>
+			          <%= f.submit '送信' %>
+			        <% end %>
+			    </div>
 			</div>
 		</div>
 	</div>
