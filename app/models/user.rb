@@ -18,10 +18,6 @@ class User < ApplicationRecord
   validates :name, length: {maximum: 20, minimum: 2}
   validates :introduction, length: {maximum: 50}
 
-  #フォロー
-  def already_favorited?(book)
-    self.favorites.exists?(book_id: book.id)
-  end
 
   def follow(other_user)
     unless self == other_user
