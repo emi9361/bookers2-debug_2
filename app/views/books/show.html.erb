@@ -47,32 +47,16 @@
 					<% end %>
 				  </tr>
 			  </table>
-				<table>
-					<tbody>
-					  <% @book2.book_comments.each do |book_comment| %>
-					  <tr>
-					      <td><%= image_tag('no-image-mini.jpg', style: "width: 60px; height: 60px;") %><br>
-					      	<%= book_comment.user.name %>
-					      </td>
-					      <td>
-					     	  <%= book_comment.comment %></td>
-					    <% if book_comment.user == current_user %>
-					      <td><%= link_to "削除",book_book_comments_path(book_comment.book, book_comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class:"btn btn-danger pull-right"%>
-					      </td>
-					    <% end %>
-					  </tr>
-					 <% end %>
-				</table>
-
-			  	<ol>
-			    	<%= form_for [@book2, @book_comment] do |f| %>
-			    	<%= f.text_area :comment,rows:'5', class:"form-control",placeholder:"コメント" %>
-			    	<%= f.submit "送信" %>
-			    	<% end %>
-			    </ol>
+				<!--非同期処理表示コメント-->
+				<ul id="comments_area">
+					<%= render 'book_comments/index', {book_comment: @book_comment, book: @book} %>
+				</ul>
+				<!--非同期処理フォーム-->
+				<div class="comment-form">
+					<%= render 'book_comments/form', {book: @book2, book_comment: @book_comment} %>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 

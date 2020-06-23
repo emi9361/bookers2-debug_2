@@ -1,0 +1,18 @@
+
+<table>
+	<tbody>
+	  <% @book2.book_comments.each do |book_comment| %>
+	  <tr>
+	      <td><%= image_tag('no-image-mini.jpg', style: "width: 60px; height: 60px;") %><br>
+	      	<%= book_comment.user.name %>
+	      </td>
+	      <td>
+	     	  <%= book_comment.comment %></td>
+	    <% if current_user == book_comment.user%>
+	      <td><%= link_to "削除", book_book_comments_path(book_comment.book, book_comment), method: :delete, remote: true, data: {confirm: "本当に削除してもよろしいですか？"}, class:"btn btn-danger pull-right"%>
+	      </td>
+	    <% end %>
+	  </tr>
+	 <% end %>
+	</tbody>
+</table>
