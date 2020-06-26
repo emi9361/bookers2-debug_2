@@ -40,4 +40,5 @@ class UsersController < ApplicationController
        redirect_to user_path(current_user)
     end
   end
+
 end
