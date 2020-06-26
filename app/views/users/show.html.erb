@@ -52,4 +52,53 @@
 	</div>
 </div>
 		<!--books一覧 -->
+<div class="row">
+	<div class="col-xs-1">
+	</div>
+	<div class="col-xs-11">
+		<% if current_user == @user %>
+		<h2>Your Map</h2>
+		<div id="map"></div>
+
+		<style>
+			#map{
+				height: 600px;
+			}
+		</style>
+
+		<script>
+	var map;
+	// varで定数を宣言する
+
+  function initMap(){
+	var lat_lng ={ lat: <%= @user.latitude %>, lng: <%= @user.longitude %>};
+	// functionでマップの機能を定義
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: lat_lng,
+    zoom: 12,
+  });
+  // map = new google.maps.Mapで地図の詳細を定義
+  // getElementByIdでmapの表示させる場所を指定(div id=map)
+
+  //positionに指定した座標にピンを表示
+  marker = new google.maps.Marker({
+    position: lat_lng,
+    map: map
+  });
+}
+
+//       map = new google.maps.Map(document.getElementById('map'), { 
+//         center: { // 地図の中心を指定
+//             lat: 34.7019399, // 緯度
+//             lng: 135.51002519999997 // 経度
+//         },
+//         zoom: 19
+//     });
+// }
+
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap", async: true, defer: true)) ></script>
+</div>
+<% end %>
 

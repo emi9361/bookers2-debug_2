@@ -9,13 +9,28 @@
     <%= f.text_field :name, autofocus: true, class: "name" %>
   </div>
   <!--name表示の追加-->
-
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, class: "email" %>
   </div>
-
+ <!-- 住所機能 -->
   <div class="field">
+    <%= f.label :Postal_code %><br>
+    <%= f.text_field :postcode,autofocus: true, placeholder:'郵便番号を半角で入力', class: "postal_code" %>
+  </div>
+  <div class="field">
+    <%= f.label :prefecture_code %><br>
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, class: "address" %><br>
+    <%= f.label :City %><br>
+    <%= f.text_field :address_city, autofocus: true,placeholder: '市町名を入力', class: "address" %><br>
+    <%= f.label :Street %><br>
+    <%= f.text_field :address_street, autofoscus: true, placeholder: 'address', class: "street" %><br>
+    <%= f.label :Building %><br>
+    <%= f.text_field :address_building,autofocus: true,placeholder: '建物、部屋番号を入力',class: "building" %><br>
+  </div>
+
+<!--パスワードフォーム-->
+ <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>

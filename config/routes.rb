@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 end
 
   resources :users,only: [:show,:index,:edit,:update]
-
+  resources :maps, only: [:index]
+  	get '/map_request', to: 'maps#map', as: 'map_request'
 end
