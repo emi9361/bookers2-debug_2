@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'samples/index'
   devise_for :users
   root 'home#top'
   get 'home/about'
